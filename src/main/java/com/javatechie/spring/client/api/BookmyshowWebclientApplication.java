@@ -35,7 +35,7 @@ public class BookmyshowWebclientApplication {
 	}
 
 	@PostMapping("/bookNow")
-	public Mono<String> BookNow(@RequestBody BookRequest request) {
+	public Mono<String> bookNow(@RequestBody BookRequest request) {
 		return webClient.post().uri("/bookingShow")
 				.syncBody(request)
 				.retrieve()
