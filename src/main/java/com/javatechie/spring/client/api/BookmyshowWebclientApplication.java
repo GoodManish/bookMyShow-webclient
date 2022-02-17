@@ -2,6 +2,7 @@ package com.javatechie.spring.client.api;
 
 import javax.annotation.PostConstruct;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import reactor.core.publisher.Mono;
 @SpringBootApplication
 @RestController
 @RequestMapping("/bookMyShow-client")
+@Slf4j
 public class BookmyshowWebclientApplication {
 
 	WebClient webClient;
@@ -70,7 +72,7 @@ public class BookmyshowWebclientApplication {
 				.bodyToMono(BookRequest.class);
 	}
 	public void logRequest(){
-
+		log.info("--in Log Request Method--");
 	}
 
 	public static void main(String[] args) {
