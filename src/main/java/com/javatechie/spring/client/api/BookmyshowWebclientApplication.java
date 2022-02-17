@@ -69,6 +69,9 @@ public class BookmyshowWebclientApplication {
 				.retrieve()
 				.bodyToMono(BookRequest.class);
 	}
+	public void logRequest(){
+
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookmyshowWebclientApplication.class, args);
