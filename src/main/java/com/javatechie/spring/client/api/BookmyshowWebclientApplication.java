@@ -28,33 +28,45 @@ public class BookmyshowWebclientApplication {
 
 	@PostConstruct
 	public void init() {
-		webClient = WebClient.builder().baseUrl("http://localhost:9090/BookMyShow/Service")
-				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+		webClient = WebClient.builder()
+				.baseUrl("http://localhost:9090/BookMyShow/Service")
+				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.build();
 	}
 
 	@PostMapping("/bookNow")
 	public Mono<String> BookNow(@RequestBody BookRequest request) {
-		return webClient.post().uri("/bookingShow").syncBody(request).retrieve().bodyToMono(String.class);
+		return webClient.post().uri("/bookingShow")
+				.syncBody(request)
+				.retrieve()
+				.bodyToMono(String.class);
 	}
 
 	@GetMapping("/trackBookings")
 	public Flux<BookRequest> trackAllBooking() {
-		return webClient.get().uri("/getAllBooking").retrieve().bodyToFlux(BookRequest.class);
+		return webClient.get().uri("/getAllBooking")
+				.retrieve()
+				.bodyToFlux(BookRequest.class);
 	}
 
 	@GetMapping("/trackBooking/{bookingId}")
 	public Mono<BookRequest> getBookingById(@PathVariable int bookingId) {
-		return webClient.get().uri("/getBooking/" + bookingId).retrieve().bodyToMono(BookRequest.class);
+		return webClient.get().uri("/getBooking/" + bookingId)
+				.retrieve()
+				.bodyToMono(BookRequest.class);
 	}
 
 	@DeleteMapping("/removeBooking/{bookingId}")
 	public Mono<String> cancelBooking(@PathVariable int bookingId) {
-		return webClient.delete().uri("/cancelBooking/" + bookingId).retrieve().bodyToMono(String.class);
+		return webClient.delete().uri("/cancelBooking/" + bookingId)
+				.retrieve()
+				.bodyToMono(String.class);
 	}
 
 	@PutMapping("/changeBooking/{bookingId}")
 	public Mono<BookRequest> updateBooking(@PathVariable int bookingId, @RequestBody BookRequest request) {
-		return webClient.put().uri("/updateBooking/" + bookingId).syncBody(request).retrieve()
+		return webClient.put().uri("/updateBooking/" + bookingId).syncBody(request)
+				.retrieve()
 				.bodyToMono(BookRequest.class);
 	}
 
